@@ -22,6 +22,7 @@ public class View extends JFrame {
 	private Process process;
 	private Perform perform;
 	private Export export;
+	private Welcome welcome;
 
 	/**
 	 * This constructor sets the size of the JFrame and initiates the imported
@@ -44,6 +45,7 @@ public class View extends JFrame {
 		process = new Process(color1, color2, dark, dark2, light, light2);
 		perform = new Perform(color1, color2, dark, dark2, light, light2);
 		export = new Export(color1, color2, dark, dark2, light, light2);
+		welcome = new Welcome(color1, color2, dark, dark2, light, light2);
 		
 		// window design
 		setUndecorated(true);
@@ -54,10 +56,11 @@ public class View extends JFrame {
 		windowView.setBackground(dark2);
 		windowView.setBorder(new EmptyBorder(5, 5, 5, 5));
 		windowView.setLayout(null);
-		windowView.add(nav.getContentPane());
-		windowView.add(check.getContentPane());
+//		windowView.add(nav.getContentPane());
+		windowView.add(welcome.getContentPane());
 		setMovingPanel();
 		setContentPane(windowView);
+//		setState(Frame.ICONIFIED);
 		this.setVisible(true);
 	}
 
@@ -88,6 +91,9 @@ public class View extends JFrame {
 
 	public UINav getNav() {
 		return nav;
+	}
+	public Welcome getWelcome() {
+		return welcome;
 	}
 
 	

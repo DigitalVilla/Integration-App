@@ -93,8 +93,8 @@ public class Check {
 		lblTitle.setFont(new Font("Lato", Font.BOLD, 24));
 		mainPanel.add(lblTitle);
 
-		warningLbl = new JLabel("wasssafsd");
-		warningLbl.setBounds(10, 380, 313, 32);
+		warningLbl = new JLabel();
+		warningLbl.setBounds(10, 380, 400, 32);
 		warningLbl.setForeground(color2);
 		warningLbl.setFont(new Font("Lato", Font.BOLD, 20));
 		mainPanel.add(warningLbl);

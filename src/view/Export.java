@@ -16,6 +16,7 @@ public class Export {
 	private JPanel contentPane;
 	private MyButton actionBtn;
 	private JLabel warningLbl;
+	private MyButton pickDir;
 
 	public Export(Color color1, Color color2, Color dark, Color dark2, Color light, Color graylight) {
 		contentPane = new JPanel();
@@ -67,6 +68,15 @@ public class Export {
 		actionBtn.addActionListener(action);
 	}
 
+	public JButton getPickDirBtn() {
+		return pickDir;
+	}
+	
+	public void getPickDirBtn(ActionListener action) {
+		pickDir.addActionListener(action);
+	}
+	
+	
 	// LOG IN CLIENT PANNEL
 	public JPanel logInPanel(Color color1, Color color2, Color dark, Color dark2, Color light, Color graylight) {
 		JPanel mainPanel = new JPanel();
@@ -75,49 +85,63 @@ public class Export {
 		mainPanel.setLayout(null);
 		mainPanel.setVisible(true);
 
-		JLabel lbl1 = new JLabel("Username");
+		JLabel lbl1 = new JLabel("Export Directory");
 		lbl1.setForeground(new Color(248, 248, 255));
 		lbl1.setFont(new Font("Lato", Font.PLAIN, 16));
-		lbl1.setBounds(85, 74, 100, 20);
+		lbl1.setBounds(85, 74, 200, 20);
 		mainPanel.add(lbl1);
 
 		textField1 = setTxtField(graylight);
-		textField1.setBounds(85, 95, 360, 40);
+		textField1.setBounds(85, 95, 200, 40);
+		textField1.setEditable(false);
 		mainPanel.add(textField1);
 
-		JLabel lbl2 = new JLabel("Password");
+		pickDir = new MyButton("Select Dir");
+		pickDir.setFocusPainted(false);
+		pickDir.setFont(new Font("Lato", Font.PLAIN, 18));
+		pickDir.setBackground(color1);
+		pickDir.setForeground(new Color(240, 240, 250));
+		pickDir.setHoverBackgroundColor(color1.darker());
+		pickDir.setPressedBackgroundColor(color1);
+		pickDir.setBounds(315, 95, 130, 40);
+		pickDir.setBorder(new EmptyBorder(0, 0, 0, 0));
+		pickDir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mainPanel.add(pickDir);
+		
+		
+		JLabel lbl2 = new JLabel("Directory Alias");
 		lbl2.setForeground(new Color(248, 248, 255));
 		lbl2.setFont(new Font("Lato", Font.PLAIN, 16));
-		lbl2.setBounds(85, 155, 100, 20);
+		lbl2.setBounds(85, 154, 200, 20);
 		mainPanel.add(lbl2);
 
 		textField2 = setTxtField(graylight);
 		textField2.setBounds(85, 175, 360, 40);
 		mainPanel.add(textField2);
 		
-		JLabel lbl3 = new JLabel("Password");
+		JLabel lbl3 = new JLabel("Export Filename");
 		lbl3.setForeground(new Color(248, 248, 255));
 		lbl3.setFont(new Font("Lato", Font.PLAIN, 16));
-		lbl3.setBounds(85, 234, 100, 20);
+		lbl3.setBounds(85, 233, 200, 20);
 		mainPanel.add(lbl3);
 		
 		textField3 = setTxtField(graylight);
-		textField3.setBounds(85, 255, 360, 40);
+		textField3.setBounds(85, 253, 360, 40);
 		mainPanel.add(textField3);
-
-		JLabel lblTitle = new JLabel("          EXPORT DATA ");
+		
+		JLabel lblTitle = new JLabel("EXPORT DATA");
 		lblTitle.setBounds(139, 32, 313, 32);
 		lblTitle.setForeground(new Color(240, 248, 255));
 		lblTitle.setFont(new Font("Lato", Font.BOLD, 24));
 		mainPanel.add(lblTitle);
 
-		warningLbl = new JLabel("wasssafsd");
+		warningLbl = new JLabel();
 		warningLbl.setBounds(10, 380, 313, 32);
 		warningLbl.setForeground(color2);
 		warningLbl.setFont(new Font("Lato", Font.BOLD, 20));
 		mainPanel.add(warningLbl);
 
-		actionBtn = new MyButton("LOG IN");
+		actionBtn = new MyButton("EXPORT");
 		actionBtn.setFocusPainted(false);
 		actionBtn.setFont(new Font("Lato", Font.PLAIN, 18));
 		actionBtn.setBackground(color1);

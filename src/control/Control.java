@@ -24,10 +24,11 @@ public class Control {
 	private View view;
 	private File payFile;
 	private File loaderDir;
+	private File exportDir;
 	private String username;
 	private String password;
 	private DBops dbOps;
-	
+
 	public Control(View view) {
 		dbOps = new DBops();
 		this.view = view;
@@ -58,6 +59,8 @@ public class Control {
 				cntrlProcess();
 			else if (e.getSource() == view.getPerform().getActionBtn())
 				cntrlPerform();
+			else if (e.getSource() == view.getExport().getPickDirBtn())
+				cntrlExportPickDir();
 			else if (e.getSource() == view.getExport().getActionBtn())
 				cntrlExport();
 			else if (e.getSource() == view.getNav().getCloseBtn())
@@ -71,10 +74,10 @@ public class Control {
 			JTextField user = view.getCheck().getTextField1();
 			JTextField pass = view.getCheck().getTextField2();
 
-			// username = user.getText();
-			// password = pass.getText();
-			username = "cprg307";
-			password = "password";
+			 username = user.getText();
+			 password = pass.getText();
+//			username = "cprg307";
+//			password = "password";
 
 			try {
 				dbOps.getConnection(username, password);
@@ -85,7 +88,7 @@ public class Control {
 					warning.setText("Insufficient Privileges");
 			} catch (SQLException e) {
 				warning.setText("Incorrect Credentials");
-				e.printStackTrace();
+//				e.printStackTrace();
 			}
 
 		}
@@ -154,7 +157,7 @@ public class Control {
 		}
 
 		private void cntrlPerform() {
-			dbOps.zeroOut(); 
+			dbOps.zeroOut();
 			updateView(3);
 
 		}
@@ -163,8 +166,27 @@ public class Control {
 			JLabel warning = view.getExport().getWarningTxt();
 			JTextField field1 = view.getExport().getTextField1();
 			JTextField field2 = view.getExport().getTextField2();
-			JTextField field3 = view.getExport().getTextField2();
-			updateView(0);
+			JTextField field3 = view.getExport().getTextField3();
+			
+			if (field1.getText().isEmpty() || field2.getText().isEmpty() || field3.getText().isEmpty())
+				warning.setText("All fields are required");
+			else {
+				dbOps.createDIr(field2.getText(), exportDir.getAbsolutePath());
+				dbOps.exportTrans( field2.getText(), field3.getText());
+//				updateView(0);
+				
+			}
+
+		}
+
+		private void cntrlExportPickDir() {
+			JFileChooser fc = new JFileChooser();
+			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			int selection = fc.showSaveDialog(null);
+			if (selection == JFileChooser.APPROVE_OPTION) {
+				exportDir = fc.getSelectedFile();
+				view.getExport().getTextField1().setText(exportDir.getName());
+			}
 
 		}
 
@@ -185,6 +207,7 @@ public class Control {
 		view.getProcess().getActionBtn(new MyActionEvent());
 		view.getPerform().getActionBtn(new MyActionEvent());
 		view.getExport().getActionBtn(new MyActionEvent());
+		view.getExport().getPickDirBtn(new MyActionEvent());
 		view.getNav().getCloseBtn(new MyActionEvent());
 	}
 

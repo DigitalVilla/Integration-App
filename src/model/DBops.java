@@ -8,8 +8,9 @@ package model;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 
 /**
@@ -54,7 +55,6 @@ public class DBops {
 	}
 
 	public void zeroOut() {
-
 		try {
 			CallableStatement st = conn.prepareCall("{call proc_month_end()}");
 			st.execute();
@@ -65,4 +65,34 @@ public class DBops {
 			}
 		}
 	}
+
+	public void createDIr(String alias, String directory) {
+		String createDir = "CREATE OR REPLACE DIRECTORY " + alias.toUpperCase() + " AS '" + directory + "'";
+		try {
+			PreparedStatement st = conn.prepareStatement(createDir);
+			st.executeUpdate();
+			st.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void exportTrans(String alias, String filename) {
+		try {
+			CallableStatement cs = conn.prepareCall("{call export_new_transactions(?,?)}");
+			cs.setString(1, alias.toUpperCase());
+			cs.setString(2, filename);
+			cs.execute();
+			cs.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+
+
 }

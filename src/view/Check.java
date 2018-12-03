@@ -87,7 +87,7 @@ public class Check {
 		textField2.setBounds(85, 200, 360, 40);
 		mainPanel.add(textField2);
 
-		JLabel lblTitle = new JLabel("      INTEGRATION APP");
+		JLabel lblTitle = new JLabel("INTEGRATION APP");
 		lblTitle.setBounds(139, 32, 313, 32);
 		lblTitle.setForeground(new Color(240, 248, 255));
 		lblTitle.setFont(new Font("Lato", Font.BOLD, 24));

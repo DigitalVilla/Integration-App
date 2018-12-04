@@ -1,6 +1,7 @@
 package control;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -173,10 +174,14 @@ public class Control {
 			else {
 				dbOps.createDIr(field2.getText(), exportDir.getAbsolutePath());
 				dbOps.exportTrans( field2.getText(), field3.getText());
-//				updateView(0);
-				
+				updateView(0);
+				dbOps.closeConn();
+				try {
+					Desktop.getDesktop().open(new File(exportDir.getAbsolutePath()+"/"+field3.getText()));
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
 			}
-
 		}
 
 		private void cntrlExportPickDir() {

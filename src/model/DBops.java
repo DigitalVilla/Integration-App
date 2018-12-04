@@ -34,7 +34,14 @@ public class DBops {
 		return conn;
 
 	}
-
+	public void closeConn() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public boolean checkPriviledges() {
 
 		boolean result = false;

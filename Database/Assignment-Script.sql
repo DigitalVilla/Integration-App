@@ -1,4 +1,12 @@
-
+/* ***************************************************************************
+** Authors: Iliya Kirichkov & Omar Villanueva                               **
+** Creation Date:   December 4, 2018                                        **
+** Description:     This system follows a double entry accounting.          **
+**                  It process transactions from a payroll.txt file.        **
+**		            Performs month end operations.                          ** 
+**		            Exports all transaction into a csv file                 **  
+** Copyrights 2018 IO-Productions.io                                        **
+*************************************************************************** **/
 /*
     Assertain that the user currently logged into the database has the
     EXECUTE privilege for the UTL_FILE package. 
